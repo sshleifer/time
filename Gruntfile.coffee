@@ -7,15 +7,15 @@ module.exports = (grunt) ->
 
     coffee:
       # Needs to be first as other things require it
+      server:
+        files:
+          'build/server.js': 'server.coffee'
       lib:
         expand: true
         cwd: 'lib/'
         src: ['*.coffee']
         dest: 'build/lib-js'
         ext: '.js'
-      server:
-        files:
-          'build/server.js': 'server.coffee'
       routes:
         expand: true
         cwd: 'pages/'
@@ -55,9 +55,11 @@ module.exports = (grunt) ->
           }
         ]
         
+    clean:
+      ['build']
 
     concurrent:
-      exec_watch:
+      dev:
         tasks: ['nodemon', 'watch']
         options:
           logConcurrentOutput: true
@@ -65,13 +67,15 @@ module.exports = (grunt) ->
     nodemon:
       dev:
         script: 'build/server.js'
+        options:
+          delay: 1000
+          watch: ['lib/**', 'pages/**', 'server.coffee']
+          ext: 'js,coffee,jade,less'
 
     watch:
-      files: ['lib/**', 'pages/**', 'server.js']
+      files: ['lib/**', 'pages/**', 'server.coffee']
       tasks: ['default']
 
-    clean:
-      ['build']
 
   _.each ['coffee', 'watch', 'copy', 'less', 'clean'], (task) ->
     grunt.loadNpmTasks 'grunt-contrib-' + task
@@ -79,4 +83,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-nodemon'
 
   grunt.registerTask 'default', ['clean', 'coffee', 'copy', 'less']
-  grunt.registerTask 'dev-server', ['default', 'concurrent:exec_watch']
+  grunt.registerTask 'dev-server', ['default', 'concurrent:dev']

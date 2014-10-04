@@ -18,5 +18,8 @@ module.exports =
       else
         @create_user collection, name, email, cb
 
+  lookup_by_id: (collection, user_id, cb) ->
+    collection.find({user_id}).toArray cb
+
   test: ->
     return 4

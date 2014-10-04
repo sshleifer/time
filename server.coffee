@@ -1,3 +1,4 @@
+
 _ = require 'underscore'
 express = require 'express'
 fs = require 'fs'
@@ -17,8 +18,6 @@ app.use "/", express.static('/home/christopher/code/time/build/pages/homepage')
 
 # Middleware
 app.use body_parser.urlencoded({ extended: false })
-
-
 
 mongo.connect (err, db) ->
   throw err if err

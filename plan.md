@@ -11,7 +11,7 @@ Where I can talk about things relevant to the app
 ### signup/
 Signup to use Time - will give you a userid
 
-### user?id=#{userid}
+### user/#{userid}
 Where a user can go to modify his/her timesheets
 
 
