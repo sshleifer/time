@@ -23,8 +23,7 @@ A running mongo daemon: `mongod`
 ### How to add a page?
 
 * Create the directory and the stuff for the page: routes, index, scripts and styles.
-* Add the frontend js and less to the Gruntfile (this needs to be fixed to be automatic)
-* Fully restart the server (why???)
+* Fully restart the server (should not be needed anymore. Will check on next page add)
 
 ## TODO
 ### Prod
@@ -32,8 +31,6 @@ A running mongo daemon: `mongod`
 * Allow user to enter how they spent time on their user page
 
 ### Infra
-* Fix bugs with restarting server on file change
-* Auto compile new pages' less and js
 * Work out why backbone is not working
 
 ### Design
@@ -48,3 +45,5 @@ A running mongo daemon: `mongod`
 ## Recently done
 * Design a somewhat useful homepage (4/10)
 * Have a link from the homepage to a page where you can create a user. (4/10)
+* Fix bugs with restarting server on file change (still minor oddity on first restart, but no problems with functinoality) (4/10)
+* Auto compile new pages' less and js (4/10)
