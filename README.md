@@ -8,22 +8,29 @@ Not very good
 
 ### Where are we going?
 
-See the plan (plan is actually not very useful at the moment)
+#### MVP
+An app that lets me track how I spend my time
 
-### How to use it
+#### Extensions
+* A todo list
+* Tie in with my gcal (and other services - http://surfkoll.se/ maybe?
+* option to ask it how to spend the next period of time usefully
+* Nice graphs and analysis of how time is spent
+* Open it up to other people!
 
-Running `npm run dev-server` will start the server listening on port 8080.
-Any changes to important files should result in the server restarting. This is a bit buggy at the moment but appears to *mostly* work.
+### Running locally
+
+* Running `npm run dev-server` will start the server listening on port 8080.
+* Any changes to important files should result in the server restarting.
 
 ### Requirements
 
-A number of node dependencies: `npm install`
-A running mongo daemon: `mongod`
+* A number of node dependencies: `npm install`
+* A running mongo daemon: `mongod`
 
-### How to add a page?
+### Technical details?
 
-* Create the directory and the stuff for the page: routes, index, scripts and styles.
-* Fully restart the server (should not be needed anymore. Will check on next page add)
+See the [plan](plan.md)
 
 ## TODO
 ### Prod
@@ -40,10 +47,10 @@ A running mongo daemon: `mongod`
 * Write test for mongo and helpers library functions
 
 ### Documentation
-* plan is horrible - think about and write out how things are going to work and link to it
 
 ## Recently done
 * Design a somewhat useful homepage (4/10)
 * Have a link from the homepage to a page where you can create a user. (4/10)
 * Fix bugs with restarting server on file change (still minor oddity on first restart, but no problems with functinoality) (4/10)
 * Auto compile new pages' less and js (4/10)
+* plan is horrible - think about and write out how things are going to work and link to it (4/10)
