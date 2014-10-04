@@ -1,0 +1,48 @@
+Goal:
+  MVP: An app that makes it easy to record how I spend my time
+  Extensions: 
+    Nice graphs showing this data
+    A todo list and an option for the app to tell you how to spend your time
+  
+Url structure:
+  Give each user a unique string. So, to add an entry to my timesheet, I would go to #{base_url}/#{my_string}
+
+Pages:
+  root: root of each user. Has links to add_time, graphs, maybe other things.
+    maybe later we want to pull more things into this page but for now lets keep each thing on its own page
+  add_time: propmts you to enter what you did and when. Adds this info to a database
+
+Database:
+  Name: name
+  User_string: unique_string
+  Events: [
+    Start_time: # time includes date
+    Duration: # or end_time?
+    Name: Some string
+  ]
+  # Could add other info? (gender, email??)
+
+Directory structure:
+  server.coffee: Define basic things about the server
+  pages/page_name:
+    routes.coffee: define the routes needed by that page (app.get/app.post)
+    index.jade: Jadefile
+    scripts/main.coffee: frontend js
+    styles/main.less: css
+  lib/*.coffee: Backend libraries - maybe helper functions or analysis tools later.
+
+  After build:
+    server -> build/server.js
+    each page -> build/pages/page_name:
+      routes.js
+      index.jade
+      main.js
+      main.css
+    lib -> build/lib-js
+
+
+Url structure:
+  /: Links to things (blog)
+  /mystring: user_homepage
+    /add_time: add an entry
+    /graphs: see graphs
