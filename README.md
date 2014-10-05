@@ -34,11 +34,12 @@ See the [plan](plan.md)
 
 ## TODO
 ### Prod
-* Implement user pages, and link to the new user's page after a user is created
-* Allow user to enter how they spent time on their user page
+* deal with hitting non existant user
+* Current way of dealing with dates/times only works on chrome
 
 ### Infra
 * Work out why backbone is not working
+* Add jslint/lint
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
@@ -49,8 +50,14 @@ See the [plan](plan.md)
 ### Documentation
 
 ## Recently done
-* Design a somewhat useful homepage (4/10)
-* Have a link from the homepage to a page where you can create a user. (4/10)
-* Fix bugs with restarting server on file change (still minor oddity on first restart, but no problems with functinoality) (4/10)
-* Auto compile new pages' less and js (4/10)
-* plan is horrible - think about and write out how things are going to work and link to it (4/10)
+### 4/10
+* Design a somewhat useful homepage
+* Have a link from the homepage to a page where you can create a user.
+* Fix bugs with restarting server on file change (still minor oddity on first restart, but no problems with functinoality)
+* Auto compile new pages' less and js
+* plan is horrible - think about and write out how things are going to work and link to it
+* Implement user pages, and link to the new user's page after a user is created
+* Allow user to enter how they spent time on their user page
+
+### 4/11
+* allow you to specify start time, end time = now

@@ -21,5 +21,9 @@ module.exports =
   lookup_by_id: (collection, user_id, cb) ->
     collection.find({user_id}).toArray cb
 
+  add_event: (collection, user_id, event, cb) ->
+    event = h.correct_timezone event
+    collection.update {user_id}, {$addToSet: {events: event}}, cb
+
   test: ->
     return 4

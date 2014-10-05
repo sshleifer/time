@@ -42,3 +42,7 @@ Where a user can go to modify his/her timesheets
     * end_time
     * name
 * ]
+
+## Times
+
+Times appear to be very very complicated. We want to store times as ISODate objects internally, but we need to make sure that they get back to people in a 

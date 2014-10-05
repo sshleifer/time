@@ -16,8 +16,9 @@ html(lang='en')
       h1 Success!
 
     p
-      Your user id is #{id}
+     | Your user id is #{id} and you can access your page 
+     a(href="/user/" + id) here
     p
-      If you forget this, you will lose all of your data
+      If you forget this url you will lose all of your data
     p
       One day you may be able to retrieve it somehow but for now you cannot

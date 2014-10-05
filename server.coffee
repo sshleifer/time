@@ -1,4 +1,3 @@
-
 _ = require 'underscore'
 express = require 'express'
 fs = require 'fs'
@@ -14,7 +13,10 @@ app.set 'views', '/home/christopher/code/time/build/pages'
 app.set 'view engine', 'jade'
 
 # Where are these files?
-app.use "/", express.static('/home/christopher/code/time/build/pages/homepage')
+app.use "/", express.static('/home/christopher/code/time/build/pages')
+
+#_.each fs.readdirSync('./pages'), (page) ->
+  #app.use "/#{page}", express.static("/home/christopher/code/time/build/pages/#{page}")
 
 # Middleware
 app.use body_parser.urlencoded({ extended: false })

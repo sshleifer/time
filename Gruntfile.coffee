@@ -1,8 +1,8 @@
 _ = require 'underscore'
 
 module.exports = (grunt) ->
+  watchlist = ['lib/**', 'pages/**', 'server.coffee', 'public/**']
   grunt.initConfig
-
     pkg: grunt.file.readJSON 'package.json'
 
     coffee:
@@ -43,12 +43,6 @@ module.exports = (grunt) ->
         files: [
           {
             expand: true
-            cwd: 'pages/public'
-            src: ['**']
-            dest: 'build/pages/public'
-          }
-          {
-            expand: true
             cwd: 'pages'
             src: ['**/*.jade']
             dest: 'build/pages'
@@ -69,11 +63,11 @@ module.exports = (grunt) ->
         script: 'build/server.js'
         options:
           delay: 1000
-          watch: ['lib/**', 'pages/**', 'server.coffee']
+          watch: watchlist
           ext: 'js,coffee,jade,less'
 
     watch:
-      files: ['lib/**', 'pages/**', 'server.coffee']
+      files: watchlist
       tasks: ['default']
 
 

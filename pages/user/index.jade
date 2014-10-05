@@ -1,7 +1,31 @@
 doctype html
 html(lang='en')
+  head
+    title #{name}
 
-body
-  h1 Welcome #{name}
-  h3 Your email is #{email}
-  h3 Don't forget your id: #{user_id}
+  body#body-js
+    // Some of this is not used at the moment...
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
+    script(src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.6/underscore-min.js")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js")
+    // end
+    script(type='text/javascript' src='/user/scripts/main.js')
+    link(rel="stylesheet" type="text/css" href="/user/styles/main.css")
+
+    .headings
+      h1 Welcome #{name}
+
+    #js-added
+
+    .add_time
+      form(action="/user/#{user_id}", method='post')
+        label Activity
+        input(type='text', name='activity')
+        br
+        label Start time
+        input(type='datetime-local', name='start_time')#js-start
+        br
+        label End time
+        input(type='datetime-local', name='end_time')#js-end
+        br
+        input(type='submit', value='Submit')
