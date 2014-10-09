@@ -34,6 +34,7 @@
     "grunt-execute": "~0.2.2",
     "grunt-concurrent": "~1.0.0",
     "grunt-nodemon": "~0.3.0",
-    "coffee-jshint": "~0.2.2"
+    "coffee-jshint": "~0.2.2",
+    "coffeelint": "~1.6.0"
   }
 }
