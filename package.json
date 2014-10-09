@@ -2,7 +2,8 @@
   "name": "time",
   "version": "0.0.1",
   "scripts": {
-    "dev-server": "grunt dev-server"
+    "dev-server": "grunt dev-server",
+    "make": "grunt default"
   },
   "engines": {
     "node": ">0.10.x"
@@ -32,6 +33,7 @@
     "grunt-contrib-jade": "~0.12.0",
     "grunt-execute": "~0.2.2",
     "grunt-concurrent": "~1.0.0",
-    "grunt-nodemon": "~0.3.0"
+    "grunt-nodemon": "~0.3.0",
+    "coffee-jshint": "~0.2.2"
   }
 }
