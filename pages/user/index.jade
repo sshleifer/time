@@ -10,8 +10,9 @@ html(lang='en')
     .headings
       h1 Welcome #{name}
 
-    +error(err)
-    +success(suc)
+    .messages
+      +error(err)
+      +success(suc)
 
     .add_time
       form(action="/user/#{user_id}", method='post')
@@ -24,7 +25,8 @@ html(lang='en')
         label End time
         input(type='datetime-local', name='end_time')#js-end
         br
-        input(type='submit', value='Submit')
+        .submit
+          button#button-js(type='submit', disabled='disabled') Add time
 
     +scripts
     script(type='text/javascript' src='scripts/main.js')

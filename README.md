@@ -4,7 +4,7 @@
 
 ### Current status
 
-Not very good
+Once I sort out the database structure, I probably have the MVP!
 
 ### Where are we going?
 
@@ -34,19 +34,18 @@ See the [plan](plan.md)
 
 ## TODO
 ### High level
-* Think about how I am currently storing things in db. Decide whether there is a better way
+* **Think about how I am currently storing things in db. Decide whether there is a better way**
 
 ### Prod
 * Current way of dealing with dates/times only works on chrome
 * Prevent submission of incomplete events. Allow you to immediately undo event submission
-* Backboneify the user page. Also put the now useless query string parsing function somewher.
 
 ### Infra
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
 
-### Tests
+### **Tests**
 * Write test for generate_userid and correct_timezone in helpers
 * Work out how to mock database to test code in mongo
 * Work out how to write tests for funcs in front end js. See [this](http://blog.codeship.io/2014/01/22/testing-frontend-javascript-code-using-mocha-chai-and-sinon.html) and [this](https://shanetomlinson.com/2013/testing-javascript-frontend-part-1-anti-patterns-and-fixes/) and [this is pretty comprehensive](http://staal.io/blog/2013/08/17/incredibly-convenient-testing-of-frontend-javascript-with-node-dot-js/) we should use [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha)
@@ -76,3 +75,4 @@ See the [plan](plan.md)
 * allow user to chose a user_id.
 * Fix signup page so that name and email are required, id is not
 * deal with hitting non existant user
+* Backboneify the user page. Also put the now useless query string parsing function somewher.

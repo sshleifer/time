@@ -1,1 +1,42 @@
 @import "../../../public/styles/main";
+
+.add_time {
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  min-height: 400px;
+
+  form {
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  label {
+    display: inline-block;
+    width: 80px;
+    float: left;
+    clear: left;
+    text-align: right;
+    margin-right: 7px;
+  }
+
+  input{
+    margin: 2px;
+    width: 227px;
+  }
+
+  .submit {
+    padding: 5px;
+    text-align: center;
+    button {
+      width: 80px;
+      background-color: '#19F415';
+      color: green;
+    }
+    button[disabled=disabled] {
+      opacity: 0.2;
+    }
+  }
+}

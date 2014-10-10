@@ -10,7 +10,21 @@ init_datetime = ->
 myview = Backbone.View.extend
   el: '#body-js'
   initialize: ->
-    alert 'hi'
     init_datetime()
+  events:
+    "keyup": "disable_submit"
+    "click .messages": "clear_message"
+
+  disable_submit: ->
+    start = $("#js-start").val()
+    end = $("#js-end").val()
+    act = $("input[name='activity']").val()
+    if start and end and act and end > start
+      $("#button-js").removeAttr("disabled")
+    else
+      $("#button-js").attr("disabled", "disabled")
+
+  clear_message: ->
+    $(".messages").fadeOut("Slow")
 
 view = new myview()
