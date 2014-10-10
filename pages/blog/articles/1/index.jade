@@ -1,0 +1,66 @@
+.headings
+  h2 An Introduction to Frontend Javascript and Backbone
+  h3 10/10/2014
+
+
+.blog_para
+  p.
+    Having written code for a single web page, for a website with an established organisation of pages, javascript and build I was
+    woefully unprepared to start writing my own website. However, from my brief experience I knew I wanted to do a few things:
+  ol
+    li Use Grunt as my build engine
+    li Use Backbone to organise my Javascript
+  p.
+    Setting up Grunt to my satisfaction proceeded fairly smoothly, and I fairly quickly had a system that compiled the
+    Coffeescript and less, moved the jade files to the build directory and rebuilt the app after any of its files were changed.
+    I figured that writing a quick test page, using JQuery and Backbone would be fairly easy and that I could soon be building my
+    time tracking app. It was fairly easy, but took forever.
+  h3 Simple Gotchas
+  p.
+    There is a lot about web programming that I did not know, and I will list a few of my early mistakes
+  ul
+    li Putting the link to the css in the body
+    li Trying to use node's npm install and require systax to get access to _, $ and Backbone.
+    li Putting the links to the scripts at the top of the body (where they could exectute before the DOM loaded)
+  p. 
+    Fortunately, a quick web search fairly quickly solved these obvious errors, and I soon had the following code (included here in full,
+    just in case anyone else who has no idea how to setup a web page with Jade, Backbone, Underscore and JQuery is interested).
+  h4 index.jade
+  pre.codeblock.
+    doctype html
+    html(lang='en')
+      head
+        link(rel="stylesheet" type="text/css" href="styles/main.css")
+        title Blog
+
+      body#body-js
+
+        h1 All the html!
+
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
+        script(src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
+        script(src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js")
+        script(type='text/javascript' src='scripts/main.js')
+ 
+  h4 scripts/main.js
+  pre.codeblock.
+    myview = Backbone.View.extend
+      el: '#body-js'
+      initialize: ->
+        @render()
+      render: ->
+        @.$el.html("hello?")
+        
+    view = new myview()
+
+  h3 The Sneaky Bug
+  p.
+    Unfortunately, while I fairly quickly had my code looking very similar to this working code included here, for about 8 hours it wasn't
+    working. I searched stackoverflow for hours trying to work out what my mistake was (and in the process found out a number of smaller issues
+    but none of which should have completely broken the code). I set up a fiddle where the code worked fine. I read the Backbone.js documentation
+    and numerous blog posts (much like this) which promised to give me a working Backbone.View. Finally I resorted to asking in stackoverflow. 
+  p The simple solution suggested to me?
+  p The underscore library I was including was out of date.
+  p.
+    I had copied the source of underscore.js from somewhere and obviously the page was out of date. The version was 1.1.6, and the current version
+    was 1.7.0. With this two character change, I had a working page.

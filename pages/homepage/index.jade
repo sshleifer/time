@@ -1,16 +1,11 @@
 doctype html
 html(lang='en')
   head
+    include ../../public/jade/mixins.jade
+    link(rel="stylesheet" type="text/css" href="styles/main.css")
     title Homepage
 
   body#body-js
-    // Some of this is not used at the moment...
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
-    script(src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.6/underscore-min.js")
-    script(src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js")
-    // end
-    script(type='text/javascript' src='/homepage/scripts/main.js')
-    link(rel="stylesheet" type="text/css" href="/homepage/styles/main.css")
 
     .headings
       h1 Time!
@@ -18,10 +13,14 @@ html(lang='en')
       h3 A simple webapp to help track it, and perhaps use it better
 
     ul.links
+      // How about a monad prompting for id and taking you to your page?
       li 
         a(href='/blog') Time blog
       li 
         a(href='/signup') Signup
-      // How about a monad prompting for id and taking you to your page?
       li 
         a(href='google.com') Google
+
+   
+    +scripts
+    script(type='text/javascript' src='scripts/main.js')

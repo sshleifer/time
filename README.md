@@ -38,12 +38,12 @@ See the [plan](plan.md)
 
 ### Prod
 * deal with hitting non existant user
-* allow user to chose a user_id. what rules should there be for this? (should we require len == 10, >= 10 for example?)
+* allow user to chose a user_id.
+* Fix signup page so that name and email are required, id is not
 * Current way of dealing with dates/times only works on chrome
 
 ### Infra
 * Work out why backbone is not working
-* Add hint and lint code
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
@@ -67,5 +67,9 @@ See the [plan](plan.md)
 * Implement user pages, and link to the new user's page after a user is created
 * Allow user to enter how they spent time on their user page
 
-### 4/11
+### 5/10
 * allow you to specify start time, end time = now
+
+### 9/10
+* Add hint and lint code
+

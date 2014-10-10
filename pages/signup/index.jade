@@ -1,25 +1,26 @@
 doctype html
 html(lang='en')
   head
-    title Homepage
+    include ../../public/jade/mixins.jade
+    link(rel="stylesheet" type="text/css" href="styles/main.css")
+    title Signup
 
   body#body-js
-    // Some of this is not used at the moment...
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
-    script(src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.6/underscore-min.js")
-    script(src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js")
-    // end
-    script(type='text/javascript' src='/scripts/main.js')
-    link(rel="stylesheet" type="text/css" href="/styles/main.css")
-
     .headings
       h1 Signup
 
-    form(action='/signup', method='post')
-      label Name
-      input(type='text', name='name')
-      br
-      label Email
-      input(type='text', name='email')
-      br
-      input(type='submit')
+    .signup
+      form(action='/signup', method='post')
+        label Name:
+        input(type='text', name='name')
+        br
+        label Email:
+        input(type='text', name='email')
+        br
+        label id:
+        input(type='text', name='id')
+        br
+        input(type='submit')
+
+    +scripts
+    script(type='text/javascript' src='scripts/main.js')

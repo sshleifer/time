@@ -47,6 +47,12 @@ module.exports = (grunt) ->
             src: ['**/*.jade']
             dest: 'build/pages'
           }
+          {
+            expand: true
+            cwd: 'public'
+            src: ['scripts/*.js', 'jade/*.jade']
+            dest: 'build/public'
+          }
         ]
         
     clean:
