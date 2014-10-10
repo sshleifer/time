@@ -13,7 +13,7 @@ module.exports =
   create_user: (collection, params, cb) ->
     params.user_id = h.generate_userid params.user_id
     return cb 'invalid id' if _.isNull params.user_id
-    collection.find({user_id:params.user_id}).toArray (err, res) =>
+    collection.find({user_id: params.user_id}).toArray (err, res) =>
       return collection.insert params, cb if _.isEmpty res
       return cb 'id already taken' if params.user_id
       @create_user collection, params, cb

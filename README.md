@@ -37,7 +37,6 @@ See the [plan](plan.md)
 * Think about how I am currently storing things in db. Decide whether there is a better way
 
 ### Prod
-* deal with hitting non existant user
 * Current way of dealing with dates/times only works on chrome
 * Prevent submission of incomplete events. Allow you to immediately undo event submission
 * Backboneify the user page. Also put the now useless query string parsing function somewher.
@@ -76,3 +75,4 @@ See the [plan](plan.md)
 * Work out why backbone is not working (underscore version...)
 * allow user to chose a user_id.
 * Fix signup page so that name and email are required, id is not
+* deal with hitting non existant user

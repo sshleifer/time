@@ -4,6 +4,7 @@ _ = require 'underscore'
 module.exports = (app, db) ->
   app.get '/user/:user_id', (req, res) ->
     mongo.lookup_by_id db, req.params.user_id, (err, user) ->
+      return res.render 'user/not_found' if _.isEmpty user
       _.extend req.query, {name: user[0].name, user_id: user[0].user_id}
       res.render 'user/index', req.query
 

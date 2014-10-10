@@ -5,6 +5,8 @@
 # `make clean` deletes all the compiled js files in lib-js
 TESTS=$(shell cd test && ls *.coffee | sed s/\.coffee$$//)
 CLIBS=$(shell find . -regex "^./lib\/.*\.coffee\$$")
+ROUTES=$(shell find ./pages -type f -name "routes.coffee")
+BROWSER=$(shell find ./pages -type f -name "*.coffee")
 LIBS=$(shell find . -regex "^./lib\/.*\.coffee\$$" | sed s/\.coffee$$/\.js/ | sed sXlibXbuild/lib-jsX)
 
 build: hint $(LIBS)
@@ -19,9 +21,11 @@ $(TESTS): build
 
 hint:
 	node_modules/coffee-jshint/cli.js $(CLIBS) -o node
+	node_modules/coffee-jshint/cli.js $(ROUTES) -o node
 
 lint:
 	./node_modules/coffeelint/bin/coffeelint -f coffeelint.json $(CLIBS)
+	./node_modules/coffeelint/bin/coffeelint -f coffeelint.json $(ROUTES)
 
 clean:
 	rm -rf build/lib-js
