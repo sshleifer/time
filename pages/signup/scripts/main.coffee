@@ -1,4 +1,3 @@
-
 myview = Backbone.View.extend
   el: '#form-js'
   events:
