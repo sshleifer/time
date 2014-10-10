@@ -8,17 +8,6 @@ pad_string = (string, len) ->
   Array(len - String(string).length+1).join('0') + string
 
 $(document).ready ->
-  a = getQueryParameters().status
-  
-  # Let us know whether event add worked
-  if a?
-    $("#js-added").css("visibility":"visible")
-    if a is 'failed'
-      $('#js-added').html("<p>Event add failed</p>")
-      $("#js-added").css("background-color": "red")
-    else if a is 'success'
-      $('#js-added').html("<p>Event add succeeded</p>")
-      $("#js-added").css("background-color": "green")
   
   # set defaults for start and end
   d = new Date(Date.now())

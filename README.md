@@ -38,12 +38,11 @@ See the [plan](plan.md)
 
 ### Prod
 * deal with hitting non existant user
-* allow user to chose a user_id.
-* Fix signup page so that name and email are required, id is not
 * Current way of dealing with dates/times only works on chrome
+* Prevent submission of incomplete events. Allow you to immediately undo event submission
+* Backboneify the user page. Also put the now useless query string parsing function somewher.
 
 ### Infra
-* Work out why backbone is not working
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
@@ -73,3 +72,7 @@ See the [plan](plan.md)
 ### 9/10
 * Add hint and lint code
 
+### 10/10
+* Work out why backbone is not working (underscore version...)
+* allow user to chose a user_id.
+* Fix signup page so that name and email are required, id is not

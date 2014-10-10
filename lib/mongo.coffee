@@ -10,13 +10,13 @@ module.exports =
       return cb null, db.collection('time')
 
 
-  create_user: (collection, name, email, cb) ->
-    user_id = h.generate_userid()
-    collection.find({user_id}).toArray (err, res) =>
-      if _.isEmpty res
-        collection.insert {name, email, user_id}, cb
-      else
-        @create_user collection, name, email, cb
+  create_user: (collection, params, cb) ->
+    params.user_id = h.generate_userid params.user_id
+    return cb 'invalid id' if _.isNull params.user_id
+    collection.find({user_id:params.user_id}).toArray (err, res) =>
+      return collection.insert params, cb if _.isEmpty res
+      return cb 'id already taken' if params.user_id
+      @create_user collection, params, cb
 
   lookup_by_id: (collection, user_id, cb) ->
     collection.find({user_id}).toArray cb

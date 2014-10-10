@@ -11,6 +11,7 @@ app = express()
 # all links to css/js is also relative to this (I think...)
 app.set 'views', '/home/christopher/code/time/build/pages'
 app.set 'view engine', 'jade'
+app.locals.pretty = true
 
 # Where are these files?
 app.use "/", express.static('/home/christopher/code/time/build/pages')

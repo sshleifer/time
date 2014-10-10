@@ -4,8 +4,8 @@ module.exports =
   
   # Should we maybe throw an error rather than returning false?
   generate_userid: (id) =>
-    if id?
-      return false if ' ' in id or id.length < 10 or id.length > 255
+    if id isnt ''
+      return null if ' ' in id or id.length < 10 or id.length > 255
       id
     else
       shorturl = Math.random().toString(36)[2..11]

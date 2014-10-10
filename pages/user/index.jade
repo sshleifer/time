@@ -10,7 +10,8 @@ html(lang='en')
     .headings
       h1 Welcome #{name}
 
-    #js-added
+    +error(err)
+    +success(suc)
 
     .add_time
       form(action="/user/#{user_id}", method='post')
