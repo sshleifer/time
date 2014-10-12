@@ -37,13 +37,20 @@ See the [plan](plan.md)
 * **Think about how I am currently storing things in db. Decide whether there is a better way**
 
 ### Prod
-* Current way of dealing with dates/times only works on chrome
-* Prevent submission of incomplete events. Allow you to immediately undo event submission
+* Current way of dealing with dates/times only works on chrome. Also funny things with timezones (fixed by not doing anything??)
+* Work out why scripts and styles path is different for homepage
+* Signup has issues: should tell them why id is invalid. Also, with background, button is ugly when low opacity
 
 ### Infra
+* Browserfy is not general. May also be overkill?
+* Errors in re-starting again. Had to remove clean
+* jshint doesn't like $
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
+ * Chose nice buttons for the sign up and user page
+ * Find a background image
+ * Find a color scheme
 
 ### **Tests**
 * Write test for generate_userid and correct_timezone in helpers
@@ -76,3 +83,6 @@ See the [plan](plan.md)
 * Fix signup page so that name and email are required, id is not
 * deal with hitting non existant user
 * Backboneify the user page. Also put the now useless query string parsing function somewher.
+
+### 12/10
+* Prevent submission of incomplete events. Allow you to immediately undo event submission. Sessions? see [here](http://blog.modulus.io/nodejs-and-express-sessions), next()?. Ajax to undo? Move add to ajax too?

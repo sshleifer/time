@@ -2,11 +2,11 @@ _ = require 'underscore'
 
 module.exports = (grunt) ->
   watchlist = ['lib/**', 'pages/**', 'server.coffee', 'public/**']
+
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
 
     coffee:
-      # Needs to be first as other things require it
       server:
         files:
           'build/server.js': 'server.coffee'
@@ -28,6 +28,11 @@ module.exports = (grunt) ->
         src: ['**/scripts/*.coffee']
         dest: 'build/pages/'
         ext: '.js'
+
+    browserify:
+      browser:
+        src: ['build/pages/user/scripts/main.js']
+        dest: 'build/pages/user/scripts/main.js'
 
     less:
       browser:
@@ -51,6 +56,12 @@ module.exports = (grunt) ->
             expand: true
             cwd: 'public'
             src: ['scripts/*.js', 'jade/*.jade']
+            dest: 'build/public'
+          }
+          {
+            expand: true
+            cwd: 'public'
+            src: ['resources/*']
             dest: 'build/public'
           }
         ]
@@ -79,8 +90,9 @@ module.exports = (grunt) ->
 
   _.each ['coffee', 'watch', 'copy', 'less', 'clean'], (task) ->
     grunt.loadNpmTasks 'grunt-contrib-' + task
-  grunt.loadNpmTasks 'grunt-concurrent'
-  grunt.loadNpmTasks 'grunt-nodemon'
 
-  grunt.registerTask 'default', ['clean', 'coffee', 'copy', 'less']
+  _.each ['concurrent', 'nodemon', 'browserify'], (task) ->
+    grunt.loadNpmTasks 'grunt-' + task
+
+  grunt.registerTask 'default', ['copy', 'less', 'coffee', 'browserify']
   grunt.registerTask 'dev-server', ['default', 'concurrent:dev']

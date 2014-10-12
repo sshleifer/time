@@ -33,15 +33,18 @@ Where a user can go to modify his/her timesheets
 
 ## Database objects
 
-### user
+### User
 * name (required for signup)
 * email (required for signup)
 * user_id (generated on signup - option for user to choose this?)
-* Events: [
+* Link to events
+
+### Events
+* list all activity names (makes it easier to do autocomplete), perhaps with freq and last used
+* Events: (An array of)
     * start_time
     * end_time
     * name
-* ]
 
 ## Times
 

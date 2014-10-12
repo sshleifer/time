@@ -11,11 +11,16 @@ html(lang='en')
       h1 Welcome #{name}
 
     .messages
-      +error(err)
-      +success(suc)
+      if err
+        .err
+          p #{err}
+      if suc
+        .suc
+          p #{suc}
+          button#undo-js(type="button") Undo
 
     .add_time
-      form(action="/user/#{user_id}", method='post')
+      form(action="/user/add_event/#{user_id}", method='post')
         label Activity
         input(type='text', name='activity')
         br
@@ -26,7 +31,7 @@ html(lang='en')
         input(type='datetime-local', name='end_time')#js-end
         br
         .submit
-          button#button-js(type='submit', disabled='disabled') Add time
+          button#submit-js(type='submit', disabled='disabled') Add time
 
     +scripts
     script(type='text/javascript' src='scripts/main.js')

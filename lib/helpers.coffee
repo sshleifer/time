@@ -12,6 +12,7 @@ module.exports =
       return shorturl if shorturl.length is 10
       @generate_userid()
 
+  # Currently unused
   correct_timezone: (event) ->
     _.each ['start_time', 'end_time'], (i) ->
       event[i] = new Date(Date.parse event[i])
