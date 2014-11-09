@@ -1,25 +1,42 @@
 url = require 'url'
 
-myview = Backbone.View.extend
-  el: '#body-js'
+add_todo = Backbone.View.extend
+  el: "#js-todo"
+  events:
+    "keyup": "disable_submit"
+    "click": "disable_submit"
+
+  # todos
+  disable_submit: ->
+    est = $("#js-estimate").val()
+    act = $("#js-todo_activity").val()
+    if est and est > 0 and act
+      $("#js-submit_todo").removeAttr("disabled")
+    else
+      $("#js-submit_todo").attr("disabled", "disabled")
+
+add_time = Backbone.View.extend
+  el: '#js-time'
   initialize: ->
     @init_datetime()
   events:
-    "keyup": "disable_submit"
     "click .messages": "clear_message"
-    "click #undo-js": "undo_submit"
-
-  disable_submit: ->
-    start = $("#js-start").val()
-    end = $("#js-end").val()
-    act = $("input[name='activity']").val()
-    if start and end and act and end >= start
-      $("#submit-js").removeAttr("disabled")
-    else
-      $("#submit-js").attr("disabled", "disabled")
+    "click #js-undo": "undo_submit"
+    "keyup": "disable_submit"
 
   clear_message: ->
     #$(".messages").fadeOut("Slow") # Interferes with undo_submit...
+
+  # events
+  disable_submit: ->
+    start = $("#js-start").val()
+    end = $("#js-end").val()
+    act = $("#js-add_activity").val() # check works
+    if start and end and act and end >= start
+      $("#js-submit").removeAttr("disabled")
+    else
+      $("#js-submit").attr("disabled", "disabled")
+
 
   undo_submit: ->
     user_id = url.parse(window.location.href).pathname.split('/')[2]
@@ -40,4 +57,5 @@ myview = Backbone.View.extend
     $("#js-start").val(display)
     $("#js-end").val(display)
 
-view = new myview()
+new add_todo()
+new add_time()

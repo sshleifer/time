@@ -14,6 +14,7 @@ module.exports =
   create_user: (db, params, cb) ->
     users = db.collection('users')
     events = db.collection('events')
+    todos = db.collection('todos')
     user_id = h.generate_userid params.user_id
     return cb 'invalid id' if _.isNull user_id
 
@@ -25,6 +26,9 @@ module.exports =
         @create_user db, params, cb
       (cb_wf) -> events.insert {}, cb_wf
       (res, cb_wf) -> users.insert _.extend(params, {events: res[0]._id, user_id}), cb_wf
+      (res, cb_wf) -> todos.insert {}, cb_wf
+      (res, cb_wf) -> users.update {user_id}, {$set: {todos: res[0]._id}}, cb_wf
+      (res, res2, cb_wf) -> users.find({user_id}).toArray cb_wf
     ], (err, user) ->
       cb err, user if user?
 
@@ -49,5 +53,17 @@ module.exports =
       (cb_wf) -> users.find({user_id}).toArray cb_wf
       (user, cb_wf) ->
         events.update {events: event}, {$pull: {events: event}}, cb_wf
+    ], (err, res) ->
+      cb err, res if res?
+
+
+  add_todo: (db, user_id, todo, cb) ->
+    users = db.collection('users')
+    todos = db.collection('todos')
+    todo.estimated_time = todo.estimated_time * 60 if todo.units is 'hours'
+    async.waterfall [
+      (cb_wf) -> users.find({user_id}).toArray cb_wf
+      (user, cb_wf) ->
+        todos.update {_id: user[0].todos}, {$addToSet: {todos: todo}}, {upsert: true}, cb_wf
     ], (err, res) ->
       cb err, res if res?

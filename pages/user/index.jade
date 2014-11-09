@@ -5,7 +5,7 @@ html(lang='en')
     link(rel="stylesheet" type="text/css" href="styles/main.css")
     title #{name}
 
-  body#body-js
+  body
 
     .headings
       h1 Welcome #{name}
@@ -17,12 +17,14 @@ html(lang='en')
       if suc
         .suc
           p #{suc}
-          button#undo-js(type="button") Undo
+          button#js-undo(type="button") Undo
 
-    .add_time
+    .add_time#js-time
+      .headings
+        h2 Add time
       form(action="/user/add_event/#{user_id}", method='post')
         label Activity
-        input(type='text', name='activity')
+        input(type='text', name='activity')#js-add_activity
         br
         label Start time
         input(type='datetime-local', name='start_time')#js-start
@@ -31,7 +33,23 @@ html(lang='en')
         input(type='datetime-local', name='end_time')#js-end
         br
         .submit
-          button#submit-js(type='submit', disabled='disabled') Add time
+          button#js-submit(type='submit', disabled='disabled') Add time
+
+    .add_time#js-todo
+      .headings
+        h2 Todos
+      form(action="/user/add_todo/#{user_id}", method='post')
+        label Activity
+        input(type='text', name='activity')#js-todo_activity
+        br
+        label Esmitated time
+        input(type='number', name='estimated_time')#js-estimate
+        select(name='units')
+          option(value='minutes') Minutes
+          option(value='hours') Hours
+        br
+        .submit
+          button#js-submit_todo(type='submit', disabled='disabled') Add todo
 
     +scripts
     script(type='text/javascript' src='scripts/main.js')

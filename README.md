@@ -27,19 +27,27 @@ An app that lets me track how I spend my time
 
 * A number of node dependencies: `npm install`
 * A running mongo daemon: `mongod`
+  * The correct collections in the database -> db.createCollection(x), where x is todos, events, users
 
 ### Technical details?
 
 See the [plan](plan.md)
 
 ## TODO
+
+### Final requirements for MVP
+* Display todos - options to make as done
+* deploy on DO
+
 ### High level
 * **Think about how I am currently storing things in db. Decide whether there is a better way**
+  * Particularly events and todos
 
 ### Prod
 * Current way of dealing with dates/times only works on chrome. Also funny things with timezones (fixed by not doing anything??)
 * Work out why scripts and styles path is different for homepage
 * Signup has issues: should tell them why id is invalid. Also, with background, button is ugly when low opacity
+* auto complete todos and events
 
 ### Infra
 * Browserfy is not general. May also be overkill?
@@ -48,8 +56,6 @@ See the [plan](plan.md)
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
- * Chose nice buttons for the sign up and user page
- * Find a background image
  * Find a color scheme
 
 ### **Tests**

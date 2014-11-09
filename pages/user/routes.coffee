@@ -20,3 +20,9 @@ module.exports = (app, db) ->
       return res.status(400).send(JSON.stringify("Failed!")) if err
       return res.status(404).send(JSON.stringify("Event not found")) if resp is 0
       res.status(200).send(JSON.stringify("Event removed!"))
+
+  app.post '/user/add_todo/:user_id', (req, res) ->
+    mongo.add_todo db, req.params.user_id, req.body, (err, resp) ->
+      return res.redirect "/user/#{req.params.user_id}?err=Event add failed!" if err
+      res.redirect "/user/#{req.params.user_id}?suc=Event add successful!"
+

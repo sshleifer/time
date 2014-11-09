@@ -38,6 +38,7 @@ Where a user can go to modify his/her timesheets
 * email (required for signup)
 * user_id (generated on signup - option for user to choose this?)
 * Link to events
+* Link to todos
 
 ### Events
 * list all activity names (makes it easier to do autocomplete), perhaps with freq and last used
@@ -45,6 +46,9 @@ Where a user can go to modify his/her timesheets
     * start_time
     * end_time
     * name
+
+### Todos
+* Much like events??
 
 ## Times
 
