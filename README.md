@@ -36,8 +36,7 @@ See the [plan](plan.md)
 ## TODO
 
 ### Final requirements for MVP
-* Display todos - options to make as done
-* deploy on DO
+* Done!
 
 ### High level
 * **Think about how I am currently storing things in db. Decide whether there is a better way**
