@@ -25,7 +25,7 @@ app.use body_parser.urlencoded({ extended: false })
 app.use cookie_parser()
 app.use session({secret: 'something', saveUninitialized: true, resave: true})
 
-mongo.connect (err, db) ->
+mongo.connect 'time', (err, db) ->
   throw err if err
 
   # Routes

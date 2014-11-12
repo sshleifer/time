@@ -42,13 +42,18 @@ Where a user can go to modify his/her timesheets
 
 ### Events
 * list all activity names (makes it easier to do autocomplete), perhaps with freq and last used
+* last_id (int)
 * Events: (An array of)
     * start_time
     * end_time
     * name
 
 ### Todos
-* Much like events??
+* last_id
+* Todos: (an array of)
+  * name
+  * estimated time
+  * due date
 
 ## Times
 
