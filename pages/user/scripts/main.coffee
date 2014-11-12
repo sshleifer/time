@@ -1,19 +1,5 @@
 url = require 'url'
 
-add_todo = Backbone.View.extend
-  el: "#js-todo"
-  events:
-    "keyup": "disable_submit"
-    "click": "disable_submit"
-
-  # todos
-  disable_submit: ->
-    est = $("#js-estimate").val()
-    act = $("#js-todo_activity").val()
-    if est and est > 0 and act
-      $("#js-submit_todo").removeAttr("disabled")
-    else
-      $("#js-submit_todo").attr("disabled", "disabled")
 
 add_time = Backbone.View.extend
   el: '#js-time'
@@ -33,17 +19,16 @@ add_time = Backbone.View.extend
     end = $("#js-end").val()
     act = $("#js-add_activity").val() # check works
     if start and end and act and end >= start
-      $("#js-submit").removeAttr("disabled")
+      $("#js-submit_time").removeAttr("disabled")
     else
-      $("#js-submit").attr("disabled", "disabled")
+      $("#js-submit_time").attr("disabled", "disabled")
 
 
   undo_submit: ->
     user_id = url.parse(window.location.href).pathname.split('/')[2]
     $.ajax
       type: "POST"
-      url: "/user/undo/#{user_id}"
-      data: {check: "me out now!"}
+      url: "/user/undo_event/#{user_id}"
       success: (data, text_status, jqxhr) ->
         $(".suc").html("<p>#{jqxhr.responseText[1..-2]}</p>")
       error: (jqxhr, type, text_status) ->
@@ -57,5 +42,72 @@ add_time = Backbone.View.extend
     $("#js-start").val(display)
     $("#js-end").val(display)
 
+add_todo = Backbone.View.extend
+  el: "#js-todo"
+  events:
+    "keyup": "disable_submit"
+    "click": "disable_submit"
+
+  # todos
+  disable_submit: ->
+    est = $("#js-estimate").val()
+    act = $("#js-todo_activity").val()
+    if est and est > 0 and act
+      $("#js-submit_todo").removeAttr("disabled")
+    else
+      $("#js-submit_todo").attr("disabled", "disabled")
+
+
+todo_list = Backbone.View.extend
+  el: "#js-todo_list"
+  initialize: ->
+    @display_todos()
+  events:
+    "mouseenter .done": "enter"
+    "mouseleave .done": "leave"
+    "click .done": "remove_todo"
+
+  enter: (event) ->
+    $(event.currentTarget).addClass("selected")
+  leave: (event) ->
+    $(event.currentTarget).removeClass("selected")
+
+  remove_todo: (event) ->
+    user_id = url.parse(window.location.href).pathname.split('/')[2]
+    $.ajax
+      type: "POST"
+      url: "/user/remove_todo/#{user_id}"
+      data: (id: $(event.currentTarget).attr("class"))
+      success: (data, text_status, jqxhr) =>
+        @display_todos()
+      error: (jqxhr, type, text_status) ->
+        cb test_status, null
+
+
+  display_todos: ->
+    @lookup (err, res) ->
+      alert 'err' if err?
+      html = ""
+      if res.length is 0
+        html = "<p>You must have things to do!</p>"
+      else
+        html = "<table><tr><th>Name</th><th>Estimated Time</th><th>Done</th></tr>"
+        _.each res, (item) ->
+          console.log item
+          html += "<tr><td>#{item.activity}</td><td>#{item.estimated_time}</td><td class='done #{item.id}'></td></tr>"
+        html += "</table>"
+      $("#js-items").html(html)
+
+  lookup: (cb) ->
+    user_id = url.parse(window.location.href).pathname.split('/')[2]
+    $.ajax
+      type: "POST"
+      url: "/user/lookup_todo/#{user_id}"
+      success: (data, text_status, jqxhr) ->
+        cb null, data
+      error: (jqxhr, type, text_status) ->
+        cb test_status, null
+
 new add_todo()
 new add_time()
+new todo_list()

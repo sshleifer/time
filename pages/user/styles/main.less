@@ -1,11 +1,14 @@
 @import "../../../public/styles/main";
 
-.add_time {
+.list_add {
   width: 700px;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  //min-height: 400px;
+}
+
+.add {
+  &:extend(.list_add);
 
   form {
     width: 350px;
@@ -40,3 +43,38 @@
     }
   }
 }
+
+.list {
+  &:extend(.list_add);
+
+  table {
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  td {
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 50px;
+    text-align: center;
+  }
+
+  .done {
+    width: 50px;
+    opacity: 0.2;
+    background: url(../../../public/resources/tick.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+  }
+  .selected {
+    opacity: 1;
+  }
+}
+

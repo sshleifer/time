@@ -11,18 +11,19 @@ html(lang='en')
     .headings
       h1 Welcome #{name}
 
-    .messages
-      if err
-        .err
-          p #{err}
-      if suc
-        .suc
-          p #{suc}
-          button#js-undo(type="button") Undo
 
-    .add_time#js-time
+    .add#js-time
       .headings
-        h2 Add time
+        h2 Add Event
+      .messages
+        if err
+          .err
+            p #{err}
+        if suc
+          .suc
+            p #{suc}
+            button#js-undo(type="button") Undo
+
       form(action="/user/add_event/#{user_id}", method='post')
         label Activity
         input(type='text', name='activity')#js-add_activity
@@ -34,11 +35,12 @@ html(lang='en')
         input(type='datetime-local', name='end_time')#js-end
         br
         .submit
-          button#js-submit(type='submit', disabled='disabled') Add time
+          button#js-submit_time(type='submit', disabled='disabled') Add time
 
-    .add_time#js-todo
+    .add#js-todo
       .headings
-        h2 Todos
+        h2 Add Todo
+
       form(action="/user/add_todo/#{user_id}", method='post')
         label Activity
         input(type='text', name='activity')#js-todo_activity
@@ -52,5 +54,9 @@ html(lang='en')
         .submit
           button#js-submit_todo(type='submit', disabled='disabled') Add todo
 
+    .list#js-todo_list
+      .headings
+        h2 Current Todos
+      #js-items
     +scripts
     script(type='text/javascript' src='scripts/main.js')
