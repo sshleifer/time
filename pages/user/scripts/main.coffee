@@ -5,6 +5,7 @@ add_time = Backbone.View.extend
   el: '#js-time'
   initialize: ->
     @init_datetime()
+    @autocomplete_activity()
   events:
     "click .messages": "clear_message"
     "click #js-undo": "undo_submit"
@@ -41,6 +42,21 @@ add_time = Backbone.View.extend
     display = "#{d.getFullYear()}-#{pad_string(d.getMonth(),2)}-#{pad_string(d.getDate(),2)}T#{pad_string(d.getHours(), 2)}:#{pad_string(d.getMinutes(),2)}"
     $("#js-start").val(display)
     $("#js-end").val(display)
+
+  autocomplete_activity: ->
+    @lookup_activities (err, res) ->
+      console.log res
+      $("#js-add_activity").autocomplete {source: res}
+
+  lookup_activities: (cb) ->
+    user_id = url.parse(window.location.href).pathname.split('/')[2]
+    $.ajax
+      type: "POST"
+      url: "/user/lookup_activities/#{user_id}"
+      success: (data, text_status, jqxhr) ->
+        cb null, data
+      error: (jqxhr, type, text_status) ->
+        cb text_status, null
 
 add_todo = Backbone.View.extend
   el: "#js-todo"
@@ -85,19 +101,27 @@ todo_list = Backbone.View.extend
       # cb text_status, null
 
 
+
   display_todos: ->
-    @lookup (err, res) ->
+    @lookup_todos (err, res) =>
+      @autocomplete_todos(if res.activities? then res.activities else [])
+      disp = if res.todos? then res.todos else []
       html = ""
-      if res.length is 0
+      if disp.length is 0
         html = "<p>You must have things to do!</p>"
       else
         html = "<table><tr><th>Name</th><th>Estimated Time</th><th>Done</th></tr>"
-        _.each res, (item) ->
+        _.each disp, (item) ->
           html += "<tr><td>#{item.activity}</td><td>#{item.estimated_time}</td><td class='done #{item.id}'></td></tr>"
         html += "</table>"
       $("#js-items").html(html)
 
-  lookup: (cb) ->
+
+  autocomplete_todos: (res) ->
+    $("#js-todo_activity").autocomplete {source: res}
+
+
+  lookup_todos: (cb) ->
     user_id = url.parse(window.location.href).pathname.split('/')[2]
     $.ajax
       type: "POST"
