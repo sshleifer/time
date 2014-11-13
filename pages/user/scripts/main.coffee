@@ -39,13 +39,12 @@ add_time = Backbone.View.extend
     pad_string = (string, len) ->
       Array(len - String(string).length+1).join('0') + string
     d = new Date(Date.now())
-    display = "#{d.getFullYear()}-#{pad_string(d.getMonth(),2)}-#{pad_string(d.getDate(),2)}T#{pad_string(d.getHours(), 2)}:#{pad_string(d.getMinutes(),2)}"
+    display = "#{d.getFullYear()}-#{pad_string(d.getMonth() + 1,2)}-#{pad_string(d.getDate(),2)}T#{pad_string(d.getHours(), 2)}:#{pad_string(d.getMinutes(),2)}"
     $("#js-start").val(display)
     $("#js-end").val(display)
 
   autocomplete_activity: ->
     @lookup_activities (err, res) ->
-      console.log res
       $("#js-add_activity").autocomplete {source: res}
 
   lookup_activities: (cb) ->
@@ -131,6 +130,21 @@ todo_list = Backbone.View.extend
       error: (jqxhr, type, text_status) ->
         cb text_status, null
 
+delete_user = Backbone.View.extend
+  el: "#js-delete"
+  events:
+    "click #js-delete_user": "open_modal"
+    #"click #js-yes": "delete_user"
+    "click #js-no": "close_modal"
+  open_modal: ->
+    $("#js-modal").addClass("modal-open")
+  close_modal: ->
+    $("#js-modal").removeClass("modal-open")
+  delete_user: ->
+    user_id = url.parse(window.location.href).pathname.split('/')[2]
+    $.post "/user/delete_user/#{user_id}"
+
 new add_todo()
 new add_time()
 new todo_list()
+new delete_user()

@@ -46,7 +46,9 @@ See the [plan](plan.md)
 * Current way of dealing with dates/times only works on chrome. Also funny things with timezones (fixed by not doing anything??)
 * Work out why scripts and styles path is different for homepage
 * Signup has issues: should tell them why id is invalid. Also, with background, button is ugly when low opacity
-* auto complete todos and events
+* option to delete user
+* option to lookup user_id by name + email
+* Things in lib/mongo can use other async not just waterfall
 
 ### Infra
 * Browserfy is not general. May also be overkill?

@@ -54,6 +54,15 @@ users =
     ], (err, user) ->
       cb err, user if user?
 
+  delete_user: (db, user_id, cb) ->
+    @user_by_id db, user_id, (err, user) ->
+      async.waterfall [
+        (cb_wf) -> db.collection('events').remove {_id: user.events}, cb_wf
+        (a, b, cb_wf) -> db.collection('todos').remove {_id: user.todos}, cb_wf
+        (a, b, cb_wf) -> db.collection('users').remove {user_id: user.user_id}, cb_wf
+      ], (err, a, b) ->
+        cb err, [a, b]
+
   user_by_id: (db, user_id, cb) ->
     users = db.collection('users')
     users.find({user_id}).toArray (err, res) ->

@@ -3,10 +3,16 @@ _ = require 'underscore'
 
 module.exports = (app, db) ->
 
+  # USER
   app.get '/user/:user_id', (req, res) ->
     mongo.user_by_id db, req.params.user_id, (err, user) ->
       return res.render 'user/not_found' if _.isEmpty user
       res.render 'user/index', _.extend req.query, {name: user.name, user_id: user.user_id}
+
+  app.post '/user/delete_user/:user_id', (req, res) ->
+    mongo.delete_user db, req.params.user_id, (err, res) ->
+    # What if err?
+    return res.redirect '/'
 
 
   # EVENTS
