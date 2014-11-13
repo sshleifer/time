@@ -49,7 +49,7 @@ module.exports = (grunt) ->
           {
             expand: true
             cwd: 'pages'
-            src: ['**/*.jade']
+            src: ['**/*.jade', '**/*.css']
             dest: 'build/pages'
           }
           {

@@ -147,9 +147,11 @@ m.connect 'TESTDB', (err, db) ->
       it "correctly adds the #{i+1}th event", (done) ->
         async.waterfall [
           (cb_wf) -> m.add_event db, USERS[2].user_id, EVENT[i], cb_wf
-          (a, b, cb_wf) -> m.events_by_id db, USERS[2].user_id, cb_wf
+          (res, cb_wf) -> m.events_by_id db, USERS[2].user_id, cb_wf
         ], (err, res) ->
           assert.deepEqual EVENT[i], res.events[i]
+          assert.equal res.activities.length, i+1
+          assert EVENT[i].activity in res.activities
           done()
 
     it "correctly removes an event", (done) ->
@@ -170,10 +172,12 @@ m.connect 'TESTDB', (err, db) ->
       it "correctly adds the #{i+1}th todo", (done) ->
         async.waterfall [
           (cb_wf) -> m.add_todo db, USERS[2].user_id, TODO[i], cb_wf
-          (a, b, cb_wf) -> m.todos_by_id db, USERS[2].user_id, cb_wf
+          (res, cb_wf) -> m.todos_by_id db, USERS[2].user_id, cb_wf
         ], (err, res) ->
           assert.equal TODO[i].activity, res.todos[i].activity
           assert.equal TODO[i].estimated_time, 60
+          assert.equal res.activities.length, i+1
+          assert TODO[i].activity in res.activities
           done()
 
     it "correctly removes an todo", (done) ->

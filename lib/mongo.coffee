@@ -18,10 +18,14 @@ m_helpers =
   _add_sth: (db, user_id, to_add, sth, cb) ->
     @_sth_by_id db, user_id, sth, (err, res) ->
       to_add.id = res.last_id + 1
-      db.collection(sth).update {_id: res._id}, {$set: {last_id: to_add.id}}, (err, a, b) ->
-        to_update = {}
-        to_update["#{sth}"] = to_add
-        db.collection(sth).update {_id: res._id}, {$addToSet: to_update}, {upsert: true}, cb
+      to_update = {}
+      to_update["#{sth}"] = to_add
+      async.waterfall [
+        (cb_wf) -> db.collection(sth).update {_id: res._id}, {$set: {last_id: to_add.id}}, cb_wf
+        (a, b, cb_wf) -> db.collection(sth).update {_id: res._id}, {$addToSet: {activities: to_add.activity}}, {upsert: true}, cb_wf
+        (a, b, cb_wf) -> db.collection(sth).update {_id: res._id}, {$addToSet: to_update}, {upsert: true}, cb_wf
+      ], (err, a, b) ->
+        cb err, [a, b]
 
   # To_remove is just a query
   _remove_sth: (db, user_id, to_remove, sth, cb) ->
