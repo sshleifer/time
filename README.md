@@ -66,28 +66,7 @@ See the [plan](plan.md)
   * Not sure how to check if tests are passing - do we have to open html files manually? Not end of world but not sure how that could be integrated into a CI system.
 ### Documentation
 
-## Recently done
-### 4/10
-* Design a somewhat useful homepage
-* Have a link from the homepage to a page where you can create a user.
-* Fix bugs with restarting server on file change (still minor oddity on first restart, but no problems with functinoality)
-* Auto compile new pages' less and js
-* plan is horrible - think about and write out how things are going to work and link to it
-* Implement user pages, and link to the new user's page after a user is created
-* Allow user to enter how they spent time on their user page
-
-### 5/10
-* allow you to specify start time, end time = now
-
-### 9/10
-* Add hint and lint code
-
-### 10/10
-* Work out why backbone is not working (underscore version...)
-* allow user to chose a user_id.
-* Fix signup page so that name and email are required, id is not
-* deal with hitting non existant user
-* Backboneify the user page. Also put the now useless query string parsing function somewher.
-
-### 12/10
-* Prevent submission of incomplete events. Allow you to immediately undo event submission. Sessions? see [here](http://blog.modulus.io/nodejs-and-express-sessions), next()?. Ajax to undo? Move add to ajax too?
+## Deploy
+* Log onto server
+* pull
+* `npm run prod-server`

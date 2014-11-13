@@ -7,6 +7,9 @@ session = require 'express-session'
 
 mongo = require './lib-js/mongo'
 
+PORT = if process.argv[2] is 'prod' then 80 else 8080
+DB = if process.argv[2] is 'prod' then 'prod-time' else 'dev-time'
+
 # Setup
 app = express()
 
@@ -25,12 +28,12 @@ app.use body_parser.urlencoded({ extended: false })
 app.use cookie_parser()
 app.use session({secret: 'something', saveUninitialized: true, resave: true})
 
-mongo.connect 'time', (err, db) ->
+mongo.connect DB, (err, db) ->
   throw err if err
 
   # Routes
   _.each fs.readdirSync('./pages'), (page) ->
     require("./pages/#{page}/routes") app, db
 
-  server = app.listen 8080, ->
-    console.log 'listening on port 8080'
+  server = app.listen PORT, ->
+    console.log "listening on port #{PORT}"

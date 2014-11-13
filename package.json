@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev-server": "grunt dev-server",
-    "make": "grunt default"
+    "make": "grunt default",
+    "prod-server": "grunt clean; npm run make; sudo node build/server.js prod &"
   },
   "engines": {
     "node": ">0.10.x"
