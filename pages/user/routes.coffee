@@ -1,5 +1,4 @@
 mongo = require '../../lib-js/mongo'
-console.log mongo
 _ = require 'underscore'
 
 module.exports = (app, db) ->
@@ -29,13 +28,11 @@ module.exports = (app, db) ->
       res.redirect "/user/#{req.params.user_id}"
 
   app.post '/user/remove_todo/:user_id', (req, res) ->
-    console.log req.params, req.body
     mongo.remove_todo db, req.params.user_id, {id: parseInt(req.body.id.split(' ')[1])}, (err, resp) ->
       return res.status(200).end() if _.isNull err
 
   app.post '/user/lookup_todo/:user_id', (req, res) ->
     mongo.todos_by_id db, req.params.user_id, (err, resp) ->
-      console.log resp
       res.type('json')
       return res.status(400).send(JSON.stringify("Failed!")) if err
       res.status(200).send(JSON.stringify(if resp?.todos? then resp.todos else []))

@@ -80,20 +80,19 @@ todo_list = Backbone.View.extend
       data: (id: $(event.currentTarget).attr("class"))
       success: (data, text_status, jqxhr) =>
         @display_todos()
-      error: (jqxhr, type, text_status) ->
-        cb test_status, null
+      # Do something on error?
+      #error: (jqxhr, type, text_status) ->
+      # cb text_status, null
 
 
   display_todos: ->
     @lookup (err, res) ->
-      alert 'err' if err?
       html = ""
       if res.length is 0
         html = "<p>You must have things to do!</p>"
       else
         html = "<table><tr><th>Name</th><th>Estimated Time</th><th>Done</th></tr>"
         _.each res, (item) ->
-          console.log item
           html += "<tr><td>#{item.activity}</td><td>#{item.estimated_time}</td><td class='done #{item.id}'></td></tr>"
         html += "</table>"
       $("#js-items").html(html)
@@ -106,7 +105,7 @@ todo_list = Backbone.View.extend
       success: (data, text_status, jqxhr) ->
         cb null, data
       error: (jqxhr, type, text_status) ->
-        cb test_status, null
+        cb text_status, null
 
 new add_todo()
 new add_time()

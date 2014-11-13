@@ -28,7 +28,6 @@ m_helpers =
     @_sth_by_id db, user_id, sth, (err, res) ->
       to_update = {}
       to_update["#{sth}"] = to_remove
-      console.log to_update
       db.collection(sth).update {_id: res._id}, {$pull: to_update}, cb
 
 users =
