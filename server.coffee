@@ -7,7 +7,7 @@ session = require 'express-session'
 
 mongo = require './lib-js/mongo'
 
-PORT = if process.argv[2] is 'prod' then 80 else 8080
+PORT = 8080
 DB = if process.argv[2] is 'prod' then 'prod-time' else 'dev-time'
 
 # Setup

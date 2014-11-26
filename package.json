@@ -4,7 +4,7 @@
   "scripts": {
     "dev-server": "grunt dev-server",
     "make": "grunt default",
-    "prod-server": "grunt clean; npm run make; sudo node build/server.js prod &"
+    "prod-server": "grunt clean; npm run make; node build/server.js prod &"
   },
   "engines": {
     "node": ">0.10.x"
