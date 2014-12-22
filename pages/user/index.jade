@@ -46,7 +46,7 @@ html(lang='en')
         label Activity
         input(type='text', name='activity')#js-todo_activity
         br
-        label Esmitated time
+        label Estimated time
         input(type='number', name='estimated_time')#js-estimate
         select(name='units')
           option(value='minutes') Minutes
@@ -59,6 +59,16 @@ html(lang='en')
       .headings
         h2 Current Todos
       #js-items
+
+    .delete_user#js-delete
+      button#js-delete_user Delete user
+      .modal#js-modal
+        .modal-box
+          h3 Are you sure?
+          form(action="/user/delete_user/#{user_id}", method='post')
+            button(type='submit') Yes
+          button#js-no No
+
     +scripts
     script(type='text/javascript' src='scripts/main.js')
     script(type='text/javascript' src='http://code.jquery.com/ui/1.11.2/jquery-ui.js')

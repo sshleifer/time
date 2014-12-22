@@ -78,3 +78,33 @@
   }
 }
 
+.delete_user {
+  text-align: center;
+  .modal {
+    display: none;
+  }
+  .modal-open {
+    // move as we move
+    position: fixed;
+    // cover everything
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8); // Dims background
+    z-index: 99999; // puts modal on the top
+    display: block;
+    button {
+      width: 100px;
+      height: 50px;
+      margin: 10px 10px;
+    }
+    .modal-box {
+      width: 200px;
+      position: relative;
+      background: -webkit-linear-gradient(gray, blue);
+      margin: 10% auto;
+      border-radius: 10px;
+    }
+  }
+}

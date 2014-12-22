@@ -2,6 +2,7 @@
 Tests still required:
   Create user works when random user_id generator creates already existing id...
   Removing non existant todo/event?
+  Deleting non existant user?
 ###
 
 _ = require 'underscore'
@@ -132,11 +133,31 @@ m.connect 'TESTDB', (err, db) ->
             assert.deepEqual [ '_id', 'name', 'email', 'user_id', 'events', 'todos' ], _.keys(res)
             done()
 
-      it "returns an empty object if the user doesn't exist", (done) ->
+      it "returns null if the user doesn't exist", (done) ->
         m.user_by_id db, 'idthatdoesnotexist', (err, res) ->
-          assert.deepEqual res, null
+          assert _.isNull res
           done()
 
+    describe 'delete_user', ->
+      before (done) ->
+        m.create_user db, USERS[0], (err, res) ->
+          assert (err is 'id already taken') or (res?[0]?.name is USERS[0].name)
+          done()
+
+      it 'deletes a user when provided a valid user_id', (done) ->
+        m.user_by_id db, USERS[0].user_id, (err, user) ->
+          async.waterfall [
+            (cb_wf) -> m.delete_user db, USERS[0].user_id, cb_wf
+            (res, cb_wf) -> m.user_by_id db, USERS[0].user_id, cb_wf
+            (res, cb_wf) ->
+              assert _.isNull res
+              db.collection('events').find({_id: user.events}).toArray cb_wf
+            (res, cb_wf) ->
+              assert.deepEqual [], res
+              db.collection('todos').find({_id: user.todos}).toArray cb_wf
+          ], (err, res) ->
+            assert.deepEqual [], res
+            done()
 
   describe 'EVENTS', (done) ->
     before (done) ->
