@@ -14,5 +14,5 @@ myview = Backbone.View.extend
       $("#button-js").removeAttr("disabled")
     else
       $("#button-js").attr("disabled", "disabled")
-    
+
 view = new myview()

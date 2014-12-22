@@ -8,7 +8,6 @@ module.exports = (app, db) ->
     res.render 'signup/success', req.query
 
   app.post '/signup', (req, res) ->
-    return res.redirect "/signup?err=Bad Beta Key!" if req.body.beta != 'the ss beta'
     mongo.create_user db, req.body, (err, user) ->
       return res.redirect "/signup?err=#{err}" if err
       res.redirect "/signup/success?id=#{user[0].user_id}"
