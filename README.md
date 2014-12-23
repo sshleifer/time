@@ -44,7 +44,6 @@ See the [plan](plan.md)
 
 ### Prod
 * Work out why scripts and styles path is different for homepage
-* Signup has issues: should tell them why id is invalid. Also, with background, button is ugly when low opacity
 * option to lookup user_id by name + email
 * Things in lib/mongo can use other async not just waterfall
 * run init (setup) script on startup (on DO server)
