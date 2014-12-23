@@ -6,7 +6,7 @@ h = require '../lib/helpers'
 describe 'generate_userid', ->
   it 'generates an id of the correct length if none is provided', ->
     _.each _.range(200), (i) ->
-      id = h.generate_userid()
+      id = h.generate_userid('')
       assert.equal 10, id.length
   it 'accepts a valid user provided id', ->
     _.each ['10charlong', 'longerthan10chars', '_1234098*&^!#$'], (input) ->
@@ -20,4 +20,5 @@ describe 'generate_userid', ->
     id = ('12345678' for i in _.range(32)).join('')
     assert.equal id.length, 256
     assert not h.generate_userid id
-
+  it 'rejects an id with unicode chars', ->
+    assert not h.generate_userid '\u03A9therestisgood!'

@@ -38,7 +38,7 @@ users =
   create_user: (db, params, cb) ->
     users_db = db.collection('users')
     user_id = h.generate_userid params.user_id
-    return cb 'invalid id' if _.isNull user_id
+    return cb 'id must be between 10 and 255 ascii chars long with no whitespace' if _.isNull user_id
 
     async.waterfall [
       (cb_wf) -> users_db.find({user_id}).toArray cb_wf
