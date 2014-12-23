@@ -55,7 +55,6 @@ See the [plan](plan.md)
 ### Infra
 * Browserfy is not general. May also be overkill?
 * Errors in re-starting again. Had to remove clean
-* jshint doesn't like $
 
 ### Design
 * Everything is very very basic/ugly. Prettyify
